@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="logo.png">
+    <title>SoqRasi – Privacy. Security. AI-Augmented.</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    animation: {
+                        'fade-in': 'fadeIn 1.2s ease-in-out',
+                        'slide-up': 'slideUp 1s ease-out',
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'typewriter': 'typewriter 3.5s steps(40) 1s 1 normal both',
+                        'blink': 'blink 1s infinite',
+                        'bounce-gentle': 'bounceGentle 2s ease-in-out infinite',
+                        'rotate-slow': 'rotateSlow 20s linear infinite',
+                        'shimmer': 'shimmer 2.5s ease-in-out infinite',
+                        'scale-pulse': 'scalePulse 3s ease-in-out infinite',
+                        'slide-in-left': 'slideInLeft 1s ease-out',
+                        'slide-in-right': 'slideInRight 1s ease-out',
+                        'fade-in-up': 'fadeInUp 1.2s ease-out',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(50px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-25px)' },
+                        },
+                        glow: {
+                            '0%': { boxShadow: '0 0 15px rgba(255, 255, 255, 0.15)' },
+                            '100%': { boxShadow: '0 0 25px rgba(255, 255, 255, 0.25)' },
+                        },
+                        typewriter: {
+                            '0%': { width: '0' },
+                            '100%': { width: '100%' },
+                        },
+                        blink: {
+                            '0%, 50%': { borderColor: 'transparent' },
+                            '51%, 100%': { borderColor: '#fff' },
+                        },
+                        bounceGentle: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        rotateSlow: {
+                            '0%': { transform: 'rotate(0deg)' },
+                            '100%': { transform: 'rotate(360deg)' },
+                        },
+                        shimmer: {
+                            '0%': { backgroundPosition: '-200% 0' },
+                            '100%': { backgroundPosition: '200% 0' },
+                        },
+                        scalePulse: {
+                            '0%, 100%': { transform: 'scale(1)' },
+                            '50%': { transform: 'scale(1.05)' },
+                        },
+                        slideInLeft: {
+                            '0%': { transform: 'translateX(-100px)', opacity: '0' },
+                            '100%': { transform: 'translateX(0)', opacity: '1' },
+                        },
+                        slideInRight: {
+                            '0%': { transform: 'translateX(100px)', opacity: '0' },
+                            '100%': { transform: 'translateX(0)', opacity: '1' },
+                        },
+                        fadeInUp: {
+                            '0%': { transform: 'translateY(30px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body, .gradient-bg {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%) !important;
+            background-attachment: fixed !important;
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        .glass-effect:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+        }
+        
+        /* Disable hover effects for navigation */
+        nav.glass-effect:hover {
+            background: rgba(255, 255, 255, 0.08) !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            transform: none !important;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
+        }
+        .text-gradient, .text-gradient * {
+            background: none !important;
+            color: #fff !important;
+            -webkit-text-fill-color: #fff !important;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+        }
+        .border-gradient {
+            background: rgba(255, 255, 255, 0.05) !important;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            padding: 0;
+            backdrop-filter: blur(15px);
+            transition: all 0.3s ease;
+        }
+        .border-gradient:hover {
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.08) !important;
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        .border-gradient > div {
+            background: transparent !important;
+        }
+        .particle {
+            display: none !important;
+        }
+        .typing-cursor {
+            position: relative;
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+        }
+        
+
+        .rounded-xl, .rounded-lg, .rounded-full {
+            border-radius: 9999px !important;
+        }
+        .btn-link-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #fff;
+            color: #000;
+            border-radius: 9999px;
+            padding: 0.75rem 1.5rem;
+            font-weight: bold;
+            font-size: 1.125rem;
+            border: 2px solid #fff;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-link-icon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s;
+        }
+        .btn-link-icon:hover::before {
+            left: 100%;
+        }
+        .btn-link-icon:hover {
+            background: #000;
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+        h1, h2, h3, .font-bold {
+            font-family: 'Arial Rounded MT Bold', 'Arial', sans-serif !important;
+            font-weight: 900 !important;
+            letter-spacing: -0.02em;
+        }
+        .text-gray-300, .text-gray-400, .text-gray-500 {
+            color: #e5e5e5 !important;
+        }
+        .bg-blue-600, .bg-purple-600, .bg-cyan-600, .bg-gradient-to-r, .bg-blue-700, .bg-purple-700, .bg-purple-400, .bg-blue-400, .bg-cyan-400, .from-blue-600, .to-purple-600, .from-blue-700, .to-purple-700, .from-blue-500, .to-purple-600, .from-purple-500, .to-pink-600, .from-cyan-500, .to-blue-600 {
+            background: #fff !important;
+            color: #000 !important;
+        }
+        .hover\:text-blue-400:hover {
+            color: #fff !important;
+            text-decoration: underline;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+        }
+        .hover\:scale-105:hover {
+            transform: scale(1.05);
+        }
+        
+        /* Enhanced floating elements */
+        .floating-element {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(1px);
+            opacity: 0.7;
+            animation: float 8s ease-in-out infinite;
+        }
+        
+        /* Shimmer effect for cards */
+        .shimmer-effect {
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+            background-size: 200% 100%;
+            animation: shimmer 4s ease-in-out infinite;
+        }
+        
+        /* Enhanced navigation */
+        nav {
+            /* No animations */
+        }
+        
+        nav.scrolled {
+            background: rgba(0, 0, 0, 0.95) !important;
+            backdrop-filter: blur(25px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Mobile menu */
+        #mobile-menu {
+            display: none;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            animation: slideDown 0.3s ease-out;
+        }
+        
+        #mobile-menu.active {
+            display: block;
+        }
+        
+        /* Mobile menu when header is scrolled */
+        nav.scrolled #mobile-menu {
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(25px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        #mobile-menu a {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        #mobile-menu a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.5s;
+        }
+        
+        #mobile-menu a:hover::before {
+            left: 100%;
+        }
+        
+        /* Logo container */
+        .logo-container {
+            /* No animations */
+        }
+        
+        /* Enhanced section transitions */
+        .section-fade {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+        }
+        
+        .section-fade.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Gradient text effect */
+        .gradient-text {
+            background: linear-gradient(45deg, #fff, #e5e5e5, #fff);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 4s ease-in-out infinite;
+        }
+
+        /* Responsive fixes */
+        @media (max-width: 768px) {
+            .container {
+                padding-left: 1rem !important;
+                padding-right: 1rem !important;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem !important;
+                line-height: 1.2 !important;
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.125rem !important;
+                line-height: 1.6 !important;
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+                text-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+                max-width: 100%;
+                overflow: visible;
+            }
+            
+            .hero-subtitle .typing-cursor {
+                background: linear-gradient(45deg, #fff, #e5e5e5, #fff);
+                background-size: 200% 200%;
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+                animation: shimmer 3s ease-in-out infinite;
+                font-weight: 300;
+                letter-spacing: 0.02em;
+            }
+            
+            .hero-description {
+                font-size: 1rem !important;
+                line-height: 1.6 !important;
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+            }
+            
+            .section-title {
+                font-size: 2rem !important;
+                line-height: 1.3 !important;
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+            }
+            
+            .section-subtitle {
+                font-size: 1.125rem !important;
+                line-height: 1.5 !important;
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+            }
+            
+            .card-title {
+                font-size: 1.5rem !important;
+                line-height: 1.4 !important;
+            }
+            
+            .card-text {
+                font-size: 0.875rem !important;
+                line-height: 1.6 !important;
+            }
+            
+            .btn-link-icon {
+                padding: 0.5rem 1rem !important;
+                font-size: 1rem !important;
+                white-space: nowrap;
+            }
+            
+            .logo-size {
+                width: 2.5rem !important;
+                height: 2.5rem !important;
+            }
+            
+            .hero-logo {
+                width: 6rem !important;
+                height: 6rem !important;
+            }
+            
+
+            
+            .floating-element {
+                display: none !important;
+            }
+            
+            .glass-effect, .border-gradient {
+                padding: 1.5rem !important;
+            }
+            
+            .grid {
+                gap: 1.5rem !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2rem !important;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem !important;
+                text-shadow: 0 0 6px rgba(255, 255, 255, 0.25);
+                max-width: 100%;
+                overflow: visible;
+            }
+            
+            .section-title {
+                font-size: 1.75rem !important;
+            }
+            
+            .card-title {
+                font-size: 1.25rem !important;
+            }
+            
+            .btn-link-icon {
+                padding: 0.5rem 0.75rem !important;
+                font-size: 0.875rem !important;
+            }
+            
+            .hero-logo {
+                width: 5rem !important;
+                height: 5rem !important;
+            }
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen text-white overflow-x-hidden">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass-effect" id="navbar">
+        <div class="container mx-auto px-4 sm:px-6 py-3 sm:py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2 sm:space-x-3 logo-container">
+                    <img src="logo.png" alt="SoqRasi Logo" class="w-8 h-8 sm:w-12 sm:h-12 logo-size">
+                    <span class="text-lg sm:text-2xl font-bold text-gradient gradient-text">SoqRasi</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="hover:text-blue-400 relative group">
+                        Home
+                    </a>
+                    <a href="#about" class="hover:text-blue-400 relative group">
+                        About
+                    </a>
+                    <a href="#services" class="hover:text-blue-400 relative group">
+                        Services
+                    </a>
+                </div>
+                <div class="md:hidden">
+                    <button class="text-white" id="mobile-menu-btn">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div class="md:hidden" id="mobile-menu">
+                <div class="py-6 space-y-2">
+                    <a href="#home" class="block text-white hover:text-blue-400 py-3 px-4 rounded-lg hover:bg-white hover:bg-opacity-10 transition-all duration-300 text-lg font-medium">Home</a>
+                    <a href="#about" class="block text-white hover:text-blue-400 py-3 px-4 rounded-lg hover:bg-white hover:bg-opacity-10 transition-all duration-300 text-lg font-medium">About</a>
+                    <a href="#services" class="block text-white hover:text-blue-400 py-3 px-4 rounded-lg hover:bg-white hover:bg-opacity-10 transition-all duration-300 text-lg font-medium">Services</a>
+                </div>
+            </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center relative px-4">
+        <div class="container mx-auto text-center">
+            <div class="animate-fade-in">
+                <div class="mb-8 sm:mb-12">
+                    <div class="relative inline-block">
+                        <img src="logo.png" alt="SoqRasi Logo" class="w-20 h-20 sm:w-40 sm:h-40 mx-auto mb-6 sm:mb-8 hero-logo">
+                    </div>
+                </div>
+                
+                <h1 class="text-4xl sm:text-6xl md:text-8xl font-bold mb-6 sm:mb-8 animate-slide-up hero-title">
+                    <span class="text-gradient gradient-text">SoqRasi</span>
+                </h1>
+                
+                <div class="text-lg sm:text-2xl md:text-3xl mb-8 sm:mb-10 animate-slide-up hero-subtitle px-4" style="animation-delay: 0.3s;">
+                    <span class="typing-cursor font-light leading-relaxed max-w-4xl mx-auto block">Empowering You with Privacy, Security, and AI-Augmented Experiences.</span>
+                </div>
+                
+                <p class="text-base sm:text-xl md:text-2xl text-gray-300 mb-12 sm:mb-16 max-w-4xl mx-auto animate-slide-up leading-relaxed hero-description" style="animation-delay: 0.5s;">
+                    SoqRasi is your trusted digital space, where privacy is a right, security is a promise, and every experience is enhanced by the power of AI. 
+                </p>
+                
+                <div class="animate-slide-up" style="animation-delay: 0.7s;">
+                    <button class="btn-link-icon animate-bounce-gentle">
+                        Explore Our Vision
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Enhanced Floating Elements -->
+        <div class="floating-element top-20 left-10 w-6 h-6 bg-white rounded-full animate-pulse-slow opacity-60" style="animation-delay: 0s;"></div>
+        <div class="floating-element top-40 right-20 w-8 h-8 bg-white rounded-full animate-pulse-slow opacity-40" style="animation-delay: 1s;"></div>
+        <div class="floating-element bottom-40 left-20 w-4 h-4 bg-white rounded-full animate-pulse-slow opacity-50" style="animation-delay: 2s;"></div>
+        <div class="floating-element top-60 left-1/4 w-3 h-3 bg-white rounded-full animate-pulse-slow opacity-30" style="animation-delay: 3s;"></div>
+        <div class="floating-element bottom-60 right-1/4 w-5 h-5 bg-white rounded-full animate-pulse-slow opacity-45" style="animation-delay: 1.5s;"></div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 sm:py-24 relative section-fade px-4">
+        <div class="container mx-auto">
+            <div class="text-center mb-12 sm:mb-20">
+                <h2 class="text-3xl sm:text-5xl md:text-6xl font-bold mb-6 sm:mb-8 text-gradient gradient-text section-title">About SoqRasi</h2>
+                <p class="text-lg sm:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed section-subtitle">
+                    SoqRasi is a next-generation initiative dedicated to safeguarding your digital life. We blend uncompromising privacy, robust security, and AI-augmented experience to empower individuals and organizations in the digital era.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8 sm:gap-12">
+                <div class="glass-effect rounded-xl p-6 sm:p-10 text-center hover:scale-105 transition-all duration-500 group shimmer-effect">
+                    <div class="w-16 h-16 sm:w-20 sm:h-20 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-6 sm:mb-8 group-hover:animate-glow transition-all duration-300">
+                        <svg class="w-8 h-8 sm:w-10 sm:h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 card-title">Privacy</h3>
+                    <p class="text-gray-300 text-base sm:text-lg leading-relaxed card-text">Your data, your rules. We ensure your information stays confidential and under your control, always.</p>
+                </div>
+                
+                <div class="glass-effect rounded-xl p-6 sm:p-10 text-center hover:scale-105 transition-all duration-500 group shimmer-effect" style="animation-delay: 0.2s;">
+                    <div class="w-16 h-16 sm:w-20 sm:h-20 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-6 sm:mb-8 group-hover:animate-glow transition-all duration-300">
+                        <svg class="w-8 h-8 sm:w-10 sm:h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 card-title">AI-Augmented</h3>
+                    <p class="text-gray-300 text-base sm:text-lg leading-relaxed card-text">Experience the future with intelligent features that adapt, learn, and enhance your digital journey.</p>
+                </div>
+                
+                <div class="glass-effect rounded-xl p-6 sm:p-10 text-center hover:scale-105 transition-all duration-500 group shimmer-effect" style="animation-delay: 0.4s;">
+                    <div class="w-16 h-16 sm:w-20 sm:h-20 bg-cyan-600 rounded-full flex items-center justify-center mx-auto mb-6 sm:mb-8 group-hover:animate-glow transition-all duration-300">
+                        <svg class="w-8 h-8 sm:w-10 sm:h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 card-title">Security</h3>
+                    <p class="text-gray-300 text-base sm:text-lg leading-relaxed card-text">Advanced protection for your digital assets, powered by the latest security standards and proactive AI monitoring.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-16 sm:py-24 relative section-fade px-4">
+        <div class="container mx-auto">
+            <div class="text-center mb-12 sm:mb-20">
+                <h2 class="text-3xl sm:text-5xl md:text-6xl font-bold mb-6 sm:mb-8 text-gradient gradient-text section-title">Coming Soon</h2>
+                <p class="text-lg sm:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed section-subtitle">Comprehensive digital solutions, reimagined for privacy, security, and AI-augmented experience.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8 sm:gap-12">
+                <div class="border-gradient rounded-xl p-6 sm:p-10 text-center group hover:scale-105 transition-all duration-500">
+                    <div class="px-4 sm:px-8 py-6 sm:py-10" style="background:transparent;">
+                        <div class="w-16 h-16 sm:w-24 sm:h-24 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-6 sm:mb-8 group-hover:animate-glow transition-all duration-300">
+                            <svg class="w-8 h-8 sm:w-12 sm:h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9v-9m0-9v9m0 9c-5 0-9-4-9-9s4-9 9-9"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 card-title">Web</h3>
+                        <p class="text-gray-300 mb-6 sm:mb-8 text-base sm:text-lg leading-relaxed card-text">Private, secure, and AI-augmented web experiences for the next digital era.</p>
+                        <span class="inline-block bg-blue-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full text-sm sm:text-base font-semibold animate-pulse-slow">Coming Soon</span>
+                    </div>
+                </div>
+                
+                <div class="border-gradient rounded-xl p-6 sm:p-10 text-center group hover:scale-105 transition-all duration-500" style="animation-delay: 0.2s;">
+                    <div class="px-4 sm:px-8 py-6 sm:py-10">
+                        <div class="w-16 h-16 sm:w-24 sm:h-24 bg-gradient-to-r from-purple-500 to-pink-600 rounded-full flex items-center justify-center mx-auto mb-6 sm:mb-8 group-hover:animate-glow transition-all duration-300">
+                            <svg class="w-8 h-8 sm:w-12 sm:h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 card-title">Mobile</h3>
+                        <p class="text-gray-300 mb-6 sm:mb-8 text-base sm:text-lg leading-relaxed card-text">Your privacy-first, secure, and AI-powered mobile world—always at your fingertips.</p>
+                        <span class="inline-block bg-purple-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full text-sm sm:text-base font-semibold animate-pulse-slow">Coming Soon</span>
+                    </div>
+                </div>
+                
+                <div class="border-gradient rounded-xl p-6 sm:p-10 text-center group hover:scale-105 transition-all duration-500" style="animation-delay: 0.4s;">
+                    <div class="px-4 sm:px-8 py-6 sm:py-10">
+                        <div class="w-16 h-16 sm:w-24 sm:h-24 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-6 sm:mb-8 group-hover:animate-glow transition-all duration-300">
+                            <svg class="w-8 h-8 sm:w-12 sm:h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 card-title">Futuristic Concepts</h3>
+                        <p class="text-gray-300 mb-6 sm:mb-8 text-base sm:text-lg leading-relaxed card-text">Explore visionary, AI-driven ideas and concepts.</p>
+                        <span class="inline-block bg-cyan-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full text-sm sm:text-base font-semibold animate-pulse-slow">Coming Soon</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 sm:py-16 border-t border-gray-800 section-fade px-4">
+        <div class="container mx-auto text-center">
+            <div class="flex items-center justify-center space-x-3 sm:space-x-4 mb-6 sm:mb-8">
+                <img src="logo.png" alt="SoqRasi Logo" class="w-8 h-8 sm:w-10 sm:h-10">
+                <span class="text-xl sm:text-2xl font-bold text-gradient gradient-text">SoqRasi</span>
+            </div>
+            <p class="text-sm sm:text-base text-gray-500">© 2025 SoqRasi. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Enhanced smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Enhanced Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections for animation
+        document.querySelectorAll('.section-fade').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Enhanced typing effect
+        const typingElement = document.querySelector('.typing-cursor');
+        if (typingElement) {
+            const text = typingElement.textContent;
+            typingElement.textContent = '';
+            typingElement.style.overflow = 'visible';
+            typingElement.style.whiteSpace = 'normal';
+            typingElement.style.wordWrap = 'break-word';
+            typingElement.style.overflowWrap = 'break-word';
+            
+            let i = 0;
+            const typeWriter = () => {
+                if (i < text.length) {
+                    typingElement.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 80);
+                }
+            };
+            
+            setTimeout(typeWriter, 1500);
+        }
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Parallax effect for floating elements
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallaxElements = document.querySelectorAll('.floating-element');
+            
+            parallaxElements.forEach((element, index) => {
+                const speed = 0.5 + (index * 0.1);
+                const yPos = -(scrolled * speed);
+                element.style.transform = `translateY(${yPos}px)`;
+            });
+        });
+
+        // Enhanced hover effects for cards
+        document.querySelectorAll('.glass-effect, .border-gradient').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-8px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', function() {
+                mobileMenu.classList.toggle('active');
+            });
+            
+            // Close mobile menu when clicking on a link
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', function() {
+                    mobileMenu.classList.remove('active');
+                });
+            });
+        }
+    </script>
+</body>
+</html> 
